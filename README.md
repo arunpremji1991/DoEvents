@@ -111,7 +111,16 @@ The logos in the strip live in `assets/img/clients/`. The order and the expected
 
 ## Deploying
 
-Upload the whole folder to any static host (Netlify, Vercel, Cloudflare Pages, cPanel). The `build/` folder and this README do not need to be public.
+The site is live on Hostinger at https://dodgerblue-koala-528259.hostingersite.com. It deploys automatically from the `main` branch of https://github.com/arunpremji1991/DoEvents: push to GitHub and the live site updates within about a minute.
+
+`.htaccess` (Hostinger/Apache settings):
+- hides `build/`, this README and the git files from visitors
+- redirects to HTTPS
+- turns on compression
+- sets browser caching: a year for CSS/JS/fonts, whose links are version-stamped; 30 days for media; HTML is always re-checked
+- adds basic security headers
+
+It also works on any other Apache or LiteSpeed host.
 
 The full films take up about 226 MB. To make the site lighter, the case-study lightbox can play the YouTube versions instead: set `NO_LOCAL_FILM` in `build/data.py` to include those slugs, rebuild, and delete the matching files in `assets/video/full/`.
 
