@@ -141,7 +141,12 @@ def header(ctx, active):
     links = "".join(
         f'<a href="{ctx.L}{h}"{" aria-current=page" if h == active else ""}><span class="btn__text"><span>{t}</span><span aria-hidden="true">{t}</span></span></a>'
         for h, t in nav_items(ctx))
-    mlinks = "".join(f'<a class="big" href="{ctx.L}{h}">{t}</a>' for h, t in all_links(ctx))
+    arrow = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 11L11 1M4 1h7v7"/></svg>'
+    mlinks = "".join(
+        f'<a class="big" href="{ctx.L}{h}"{" aria-current=page" if h == active else ""}>'
+        f'<span class="mm__num" aria-hidden="true">{n:02d}</span><span class="mm__label">{t}</span>'
+        f'<span class="mm__arrow" aria-hidden="true">{arrow}</span></a>'
+        for n, (h, t) in enumerate(all_links(ctx), 1))
     return f"""<header class="header">
   <a class="header__logo" href="{ctx.L}index.html" aria-label="{x('Do Events — home', 'دو للمناسبات — الرئيسية')}">{LOGO}</a>
   <nav class="nav" aria-label="{x('Primary', 'القائمة الرئيسية')}">{links}</nav>
@@ -153,8 +158,12 @@ def header(ctx, active):
   </div>
 </header>
 <div class="mmenu" id="mmenu">
-  {mlinks}
-  <div class="mmenu__foot"><a href="{SITE['phone_href']}" dir="ltr">{SITE['phone']}</a><a href="{SITE['whatsapp_href']}" target="_blank" rel="noopener">{x('WhatsApp', 'واتساب')}</a><a href="{SITE['instagram']}" target="_blank" rel="noopener">{x('Instagram', 'إنستغرام')}</a>{lang_toggle(ctx, "lang-link")}</div>
+  <p class="mm__eyebrow">{x('Menu', 'القائمة')}</p>
+  <nav class="mm__list" aria-label="{x('Mobile menu', 'قائمة الجوال')}">{mlinks}</nav>
+  <div class="mmenu__foot">
+    <p class="mm__eyebrow">{x('Get in touch', 'تواصل معنا')}</p>
+    <div class="mm__pills"><a href="{SITE['phone_href']}" dir="ltr">{SITE['phone']}</a><a href="{SITE['whatsapp_href']}" target="_blank" rel="noopener">{x('WhatsApp', 'واتساب')}</a><a href="{SITE['instagram']}" target="_blank" rel="noopener">{x('Instagram', 'إنستغرام')}</a>{lang_toggle(ctx, "lang-link")}</div>
+  </div>
 </div>
 <div class="cursor-pill" aria-hidden="true"><span>{x('View project', 'شاهد المشروع')}</span><i></i></div>
 """

@@ -205,7 +205,7 @@
     const open = document.body.classList.toggle('menu-open');
     burger.setAttribute('aria-expanded', open);
     lock(open);
-    if (open) gsap.fromTo($$('.mmenu a.big'), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: .06, duration: 1, ease: 'expo.out', delay: .25 });
+    if (open) gsap.fromTo($$('.mmenu a.big, .mmenu__foot'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, stagger: .05, duration: .9, ease: 'expo.out', delay: .25 });
   });
 
   /* ---------- videos: lazy + play in view ---------- */

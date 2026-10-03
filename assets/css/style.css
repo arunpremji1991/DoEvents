@@ -908,3 +908,59 @@ h1, h2, h3, h4, p, a, li, dt, dd, b, strong, small, span, .btn, .chip { overflow
   .cases .is-out + .wcard-wrap::before, .cases .is-out + .wcard-wrap::after { display: none; }
 }
 @media (max-width: 760px) { .work__list { --list-gap: 110px; } }
+
+/* =========================================================
+   MOBILE MENU — list of clear, tappable options
+   ========================================================= */
+.mmenu {
+  justify-content: flex-start; overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(env(safe-area-inset-top, 0px) + 104px) var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 28px);
+  isolation: isolate;
+}
+/* brand botanical line art along the bottom so the lower area isn't empty */
+.mmenu::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: min(52vw, 300px); z-index: -1; pointer-events: none;
+  background: url("../img/brand/botanical-deep.svg") no-repeat center bottom / auto 100%;
+}
+.mm__eyebrow {
+  margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(254,224,207,.6);
+}
+.mm__eyebrow::before { content: ""; width: 18px; height: 1px; background: currentColor; }
+.mm__list { border-top: 1px solid rgba(254,224,207,.18); }
+.mmenu a.big {
+  display: flex; align-items: center; gap: 16px;
+  padding: 15px 4px; border-bottom: 1px solid rgba(254,224,207,.18);
+  font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 6.2vw, 2rem); line-height: 1.15;
+  letter-spacing: -.01em; text-transform: uppercase; color: var(--blush);
+  transition: background-color .3s, padding .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mmenu a.big:hover, .mmenu a.big:active { background: rgba(254,224,207,.06); padding-inline: 10px; }
+.mm__num { flex: none; width: 2.2em; font-family: var(--sans); font-size: .72rem; font-weight: 400; letter-spacing: .12em; color: rgba(254,224,207,.55); }
+.mm__label { flex: 1; }
+.mm__arrow {
+  flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid rgba(254,224,207,.32); color: var(--blush); transition: background .3s, color .3s;
+}
+.mm__arrow svg { width: 12px; height: 12px; }
+[dir="rtl"] .mm__arrow svg { transform: scaleX(-1); }
+.mmenu a.big[aria-current="page"] .mm__label { color: var(--white); }
+.mmenu a.big[aria-current="page"] .mm__num { color: var(--white); }
+.mmenu a.big[aria-current="page"] .mm__arrow,
+.mmenu a.big:hover .mm__arrow { background: var(--blush); color: var(--rust); border-color: var(--blush); }
+/* contact pills pinned to the bottom of the panel */
+.mmenu__foot { margin-top: auto; padding-top: 28px; display: block; }
+.mm__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.mm__pills a {
+  display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid rgba(254,224,207,.3); background: rgba(74,27,14,.35);
+  font-size: .78rem; font-weight: 500; color: var(--blush); letter-spacing: .04em;
+}
+.mm__pills a:hover, .mm__pills a:active { background: var(--blush); color: var(--rust); }
+.mm__pills .lang-link { font-size: .9rem !important; }
+/* Arabic menu */
+html[lang="ar"] .mmenu a.big { font-family: var(--ar-display); font-weight: 800; text-transform: none; letter-spacing: 0; line-height: 1.4; padding-block: 12px; }
+html[lang="ar"] .mm__eyebrow, html[lang="ar"] .mm__pills a { letter-spacing: 0; text-transform: none; font-size: .85rem; }
+html[lang="ar"] .mm__num { font-family: var(--display); }
+@media (max-height: 640px) { .mmenu a.big { padding-block: 11px; font-size: clamp(1.2rem, 5.4vw, 1.6rem); } .mmenu::after { height: 36vw; } }
