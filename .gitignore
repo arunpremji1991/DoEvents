@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Python build cache
+__pycache__/
+*.pyc
+
+# Local tooling (preview-server config for the editor)
+.claude/
+
+# Temporary QA pages
+build/_*.html
