@@ -873,3 +873,38 @@ html[lang="ar"] .contact-list a[dir="ltr"] { font-family: var(--display); font-w
 /* words never split mid-word; long headings shrink instead (see small-phone caps above) */
 h1, h2, h3, h4, p, a, li, dt, dd, b, strong, small, span, .btn, .chip { overflow-wrap: normal; word-break: normal; hyphens: manual; }
 .nw { white-space: nowrap; }
+
+/* ---------- divider between stacked projects: thin blush rule with a small Do ornament ---------- */
+.work__list { --list-gap: clamp(100px, 14vw, 200px); gap: var(--list-gap); }
+.work__list > .wcard-wrap + .wcard-wrap,
+.cases > .wcard-wrap + .wcard-wrap { position: relative; }
+.work__list > .wcard-wrap + .wcard-wrap::before,
+.work__list > .wcard-wrap + .wcard-wrap::after { content: ""; position: absolute; pointer-events: none; }
+/* the rule, centred in the gap above each following project */
+.work__list > .wcard-wrap + .wcard-wrap::before {
+  left: 0; right: 0; top: calc(var(--list-gap) / -2); height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(254,224,207,.32) 18%, rgba(254,224,207,.32) 82%, transparent);
+}
+/* the ornament sits on the rule, with a rust "gap" behind it so the line stops either side */
+.work__list > .wcard-wrap + .wcard-wrap::after {
+  left: 50%; top: calc(var(--list-gap) / -2); width: 26px; height: 37px; transform: translate(-50%, -50%);
+  background: var(--bg-dark) url("../img/brand/frame-ornament-blush.svg") center / 18px auto no-repeat;
+  box-shadow: 0 0 0 10px var(--bg-dark); opacity: .9;
+}
+/* case-study listing: one column on phones/tablets → same divider */
+@media (max-width: 860px) {
+  .cases { --list-gap: clamp(70px, 9vw, 130px); }
+  .cases > .wcard-wrap + .wcard-wrap::before,
+  .cases > .wcard-wrap + .wcard-wrap::after { content: ""; position: absolute; pointer-events: none; }
+  .cases > .wcard-wrap + .wcard-wrap::before {
+    left: 0; right: 0; top: calc(var(--list-gap) / -2); height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(254,224,207,.32) 18%, rgba(254,224,207,.32) 82%, transparent);
+  }
+  .cases > .wcard-wrap + .wcard-wrap::after {
+    left: 50%; top: calc(var(--list-gap) / -2); width: 26px; height: 37px; transform: translate(-50%, -50%);
+    background: var(--bg-dark) url("../img/brand/frame-ornament-blush.svg") center / 18px auto no-repeat;
+    box-shadow: 0 0 0 10px var(--bg-dark); opacity: .9;
+  }
+  .cases .is-out + .wcard-wrap::before, .cases .is-out + .wcard-wrap::after { display: none; }
+}
+@media (max-width: 760px) { .work__list { --list-gap: 110px; } }
