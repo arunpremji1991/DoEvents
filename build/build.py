@@ -92,7 +92,7 @@ def head(ctx, title, desc, og="assets/img/poster/hero.jpg", loader=False, ld="")
     loader_html = ""
     if loader:
         loader_html = f"""<div class="loader" aria-hidden="true">
-  <div class="loader__mark"><img src="{ctx.r}assets/img/brand/frame-do-dark.svg" alt=""><div class="fill"><img src="{ctx.r}assets/img/brand/frame-do-dark.svg" alt=""></div></div>
+  <div class="loader__mark">{LOGO}<div class="fill">{LOGO}</div></div>
   <div class="loader__tag">{x("Salalah · Oman", "صلالة · عُمان")}<b {x('lang="ar"', 'lang="en"')}>{x(SITE['tagline_ar'], SITE['tagline'])}</b></div>
   <div class="loader__count">00</div>
 </div>
@@ -104,7 +104,7 @@ def head(ctx, title, desc, og="assets/img/poster/hero.jpg", loader=False, ld="")
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<meta name="theme-color" content="#9b4825">
+<meta name="theme-color" content="#0d0a09">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{x('Do Events', 'دو للمناسبات')}">
 <meta property="og:locale" content="{x('en_US', 'ar_OM')}">

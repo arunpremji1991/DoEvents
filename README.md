@@ -15,27 +15,31 @@ The site is fully bilingual. English pages live at the root and Arabic pages at 
 
 The look follows the Do brand pattern and sticker files.
 
-**Colours** (CSS variables at the top of `assets/css/style.css`):
+**Colours** (CSS variables at the top of `assets/css/style.css`). The look is a warm black ground with the brand rust and blush as accents:
 
 | Token | Value | Use |
 |---|---|---|
-| `--rust` / `--bg-dark` | `#9B4825` | main brand ground |
-| `--rust-ink` | `#7E381D` | tonal ornament on rust |
-| `--bg-deep` | `#6B2D16` | footer, menu, page transition |
-| `--blush` / `--cream` | `#FEE0CF` | light sections, text on rust |
-| `--ink` | `#4A1B0E` | text on blush |
+| `--bg-dark` | `#0D0A09` | main ground (warm black) |
+| `--bg-dark-2` / `--bg-dark-3` | `#161110` / `#211916` | cards, media placeholders, dark buttons |
+| `--bg-deep` | `#080605` | footer, menu, page transition |
+| `--ember` | `#E39A6C` | copper accent on black (highlights, active links) |
+| `--rust` | `#9B4825` | brand rust: buttons, hairlines, cartouche |
+| `--blush` / `--cream` | `#FEE0CF` | light sections, text on black |
+| `--ink` | `#1C1411` | text on blush |
 
-**Patterns** are in `assets/img/brand/`, rebuilt as vectors from the brand PDF, with the Chocolates & Flowers logo removed. Each comes in `-rust`, `-blush` and `-deep` colour versions.
+**Decoration (no patterns).** The site no longer uses the brand patterns. Atmosphere comes from light, line and the logo:
 
-| Pattern | Where it's used |
+| Element | Where |
 |---|---|
-| `columns` (tiling ornament band) | top of the statement and Instagram sections |
-| `petals` | work sections |
-| `botanical` | call-to-action footer edge |
-| `swirl` | page headers |
-| `strands` | Weddings/Corporate split and the site footer |
+| copper/rust "stage light" glows | statement section, projects corner, behind the call-to-action ring, under the footer logo, loading screen, mobile menu |
+| thin copper light beam | dropping onto the Do Events logo in the statement section |
+| faint outline of the DO monogram (`assets/logo/do-mark-outline.svg`) | page headers, mobile menu |
+| small copper diamond | divider between stacked projects |
+| soft blush gradient | light sections |
 
-**Cartouche frames** come from the sticker sheet. `frame-do-dark` is the loading screen. The statement section on the home page shows the Do Events logo.
+The loading screen fills the Do Events logo with colour.
+
+The pattern and cartouche files are still in `assets/img/brand/` in case they're wanted again, but no page uses them.
 
 **Fonts:**
 
@@ -45,6 +49,14 @@ The look follows the Do brand pattern and sticker files.
 | Arabic | Al-Mohanad ExtraBold for main headings, Thmanyah Serif Display (falls back to Al-Mohanad) for secondary headings | Thmanyah Sans (falls back to IBM Plex Sans Arabic) |
 
 **Adding Thmanyah:** the license requires downloading it yourself from [font.thmanyah.com](https://font.thmanyah.com/). Put the Sans and Serif Display files (`.woff2`, `.otf` or `.ttf`) in `assets/fonts/thmanyah/` and run `python3 build/build.py`. The build detects the family and weight from each file name and writes `assets/css/fonts.css`. Nothing else needs changing.
+
+## Screen sizes
+
+The layout is checked from 320px phones to 2560px 27" monitors.
+
+- **Up to 1600px:** `1rem` = 16px and the content column is 1440px.
+- **Above 1600px:** the root size grows (about 18px at 1920 and 21px at 2560). Text, spacing, buttons and the 90rem content column all scale together, so a 27" screen looks like a larger version of a laptop, not a small layout floating in the middle.
+- **Edge alignment:** the header, Instagram strip and video captions line up with the content edges via the `--edge` variable.
 
 ## Background music
 

@@ -5,12 +5,12 @@
   /* Brand palette — from the Do brand pattern & sticker files */
   --rust: #9b4825;          /* primary brand ground */
   --rust-ink: #7e381d;      /* tonal ornament on rust */
-  --bg-dark: #9b4825;       /* dark sections */
-  --bg-dark-2: #8a3e1f;     /* cards on rust */
-  --bg-dark-3: #7e381d;     /* media placeholders, dark buttons */
-  --bg-deep: #6b2d16;       /* footer, transitions */
-  --ink: #4a1b0e;           /* cocoa — text on blush */
-  --ember: #ffffff;         /* accent on rust */
+  --bg-dark: #0d0a09;       /* dark sections — warm black */
+  --bg-dark-2: #161110;     /* cards on black */
+  --bg-dark-3: #211916;     /* media placeholders, dark buttons */
+  --bg-deep: #080605;       /* footer, menu, transitions */
+  --ink: #1c1411;           /* near-black — text on blush */
+  --ember: #e39a6c;         /* copper — accent on black */
   --blush: #fee0cf;
   --cream: #fee0cf;         /* light sections */
   --paper: #f8d2bc;
@@ -29,8 +29,10 @@
   --ar-serif: "Thmanyah Serif Display", "Al-Mohanad", "IBM Plex Sans Arabic", serif;
   --ar-display: "Al-Mohanad", "Thmanyah Serif Display", "IBM Plex Sans Arabic", sans-serif;
 
-  --gutter: clamp(16px, 3.4vw, 48px);
-  --max: 1440px;
+  --gutter: clamp(16px, 3.4vw, 3rem);
+  --max: 90rem;              /* 1440px at the default 16px; grows with the root size on large screens */
+  /* left/right inset that lines full-width elements up with the content column */
+  --edge: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   --radius: 14px;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --ease-io: cubic-bezier(.77, 0, .18, 1);
@@ -47,7 +49,7 @@ body {
   background: var(--bg-dark);
   color: var(--blush);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -724,7 +726,7 @@ html.js[lang="ar"] [data-split] .wi { transform: translateY(160%); }
 .about { padding-top: clamp(170px, 20vw, 260px); }
 .about::before {
   inset: 0 0 auto 0; height: clamp(180px, 26vw, 360px);
-  background: url("../img/brand/columns-rust.svg") repeat-x left top / auto 100%;
+  background: none;
   -webkit-mask-image: linear-gradient(#000 35%, transparent);
           mask-image: linear-gradient(#000 35%, transparent);
   filter: drop-shadow(0 1px 0 rgba(255,236,224,.08)) drop-shadow(0 -1px 0 rgba(74,27,14,.18));
@@ -735,7 +737,7 @@ html.js[lang="ar"] [data-split] .wi { transform: translateY(160%); }
 /* work: petals sweep in from the top-left corner */
 .work::before {
   top: 0; inset-inline-start: 0; width: min(62vw, 900px); aspect-ratio: 842 / 595;
-  background: url("../img/brand/petals-rust.svg") no-repeat left top / contain;
+  background: none;
   opacity: .9;
 }
 [dir="rtl"] .work::before { transform: scaleX(-1); }
@@ -743,31 +745,31 @@ html.js[lang="ar"] [data-split] .wi { transform: translateY(160%); }
 /* CTA: botanical line art rising from the bottom edge */
 .cta::after {
   inset: auto 0 0 0; height: clamp(160px, 30vw, 420px);
-  background: url("../img/brand/botanical-rust.svg") no-repeat center bottom / auto 100%;
+  background: none;
 }
 
 /* inner-page heroes: swirl on the trailing side */
 .phero { overflow: hidden; }
 .phero::before {
   top: -6%; inset-inline-end: -12%; width: min(72vw, 1000px); aspect-ratio: 842 / 595;
-  background: url("../img/brand/swirl-rust.svg") no-repeat right top / contain;
+  background: none;
 }
 [dir="rtl"] .phero::before { transform: scaleX(-1); }
 
 /* footer: strands across the deep rust */
 .footer::before {
-  inset: 0; background: url("../img/brand/strands-deep.svg") no-repeat center 30% / cover; opacity: .9;
+  inset: 0; background: none; opacity: .9;
 }
 .footer__giant { position: relative; z-index: 1; }
 
 /* light sections: tonal blush patterns */
 .path::after {
   inset: auto 0 0 0; height: clamp(140px, 22vw, 320px);
-  background: url("../img/brand/strands-blush.svg") no-repeat center bottom / cover;
+  background: none;
 }
 .follow::before {
   inset: 0 0 auto 0; height: clamp(150px, 20vw, 280px);
-  background: url("../img/brand/columns-blush.svg") repeat-x left top / auto 100%;
+  background: none;
   -webkit-mask-image: linear-gradient(#000 30%, transparent); mask-image: linear-gradient(#000 30%, transparent);
 }
 .follow { padding-top: clamp(150px, 17vw, 230px); }
@@ -888,7 +890,7 @@ h1, h2, h3, h4, p, a, li, dt, dd, b, strong, small, span, .btn, .chip { overflow
 /* the ornament sits on the rule, with a rust "gap" behind it so the line stops either side */
 .work__list > .wcard-wrap + .wcard-wrap::after {
   left: 50%; top: calc(var(--list-gap) / -2); width: 26px; height: 37px; transform: translate(-50%, -50%);
-  background: var(--bg-dark) url("../img/brand/frame-ornament-blush.svg") center / 18px auto no-repeat;
+  background: var(--bg-dark);
   box-shadow: 0 0 0 10px var(--bg-dark); opacity: .9;
 }
 /* case-study listing: one column on phones/tablets → same divider */
@@ -902,7 +904,7 @@ h1, h2, h3, h4, p, a, li, dt, dd, b, strong, small, span, .btn, .chip { overflow
   }
   .cases > .wcard-wrap + .wcard-wrap::after {
     left: 50%; top: calc(var(--list-gap) / -2); width: 26px; height: 37px; transform: translate(-50%, -50%);
-    background: var(--bg-dark) url("../img/brand/frame-ornament-blush.svg") center / 18px auto no-repeat;
+    background: var(--bg-dark);
     box-shadow: 0 0 0 10px var(--bg-dark); opacity: .9;
   }
   .cases .is-out + .wcard-wrap::before, .cases .is-out + .wcard-wrap::after { display: none; }
@@ -920,7 +922,7 @@ h1, h2, h3, h4, p, a, li, dt, dd, b, strong, small, span, .btn, .chip { overflow
 /* brand botanical line art along the bottom so the lower area isn't empty */
 .mmenu::after {
   content: ""; position: absolute; inset: auto 0 0 0; height: min(52vw, 300px); z-index: -1; pointer-events: none;
-  background: url("../img/brand/botanical-deep.svg") no-repeat center bottom / auto 100%;
+  background: none;
 }
 .mm__eyebrow {
   margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
@@ -964,3 +966,220 @@ html[lang="ar"] .mmenu a.big { font-family: var(--ar-display); font-weight: 800;
 html[lang="ar"] .mm__eyebrow, html[lang="ar"] .mm__pills a { letter-spacing: 0; text-transform: none; font-size: .85rem; }
 html[lang="ar"] .mm__num { font-family: var(--display); }
 @media (max-height: 640px) { .mmenu a.big { padding-block: 11px; font-size: clamp(1.2rem, 5.4vw, 1.6rem); } .mmenu::after { height: 36vw; } }
+
+/* =========================================================
+   BLACK THEME — warm black ground, blush text, copper & rust accents
+   ========================================================= */
+/* glass/overlay layers re-tinted from rust to black */
+.nav, .lang-toggle, .burger, .sound-toggle { background: rgba(20,15,13,.55); border-color: rgba(254,224,207,.18); }
+.header.is-scrolled { background-color: rgba(10,8,7,.86); box-shadow: 0 1px 0 rgba(254,224,207,.07); }
+.header.is-scrolled .nav { background: rgba(255,255,255,.04); }
+.chip { background: rgba(8,6,5,.62); border-color: rgba(254,224,207,.22); }
+.chip::before { background: var(--ember); }
+.mm__pills a { background: rgba(255,255,255,.04); border-color: rgba(254,224,207,.22); }
+.lightbox { background: rgba(5,4,3,.96); }
+.step { background: var(--bg-dark-2); border-color: rgba(254,224,207,.1); }
+.step::before { color: var(--ember); }
+.grain { mix-blend-mode: soft-light; opacity: .08; }
+::selection { background: var(--rust); color: var(--blush); }
+
+/* hero & expanding media fade into black instead of rust */
+.hero__media::after {
+  background:
+    linear-gradient(180deg, rgba(8,6,5,.6) 0%, rgba(8,6,5,.12) 30%, rgba(8,6,5,.28) 60%, rgba(13,10,9,.97) 100%),
+    radial-gradient(120% 80% at 15% 25%, rgba(155,72,37,.22), transparent 60%);
+}
+.expand__media::after { background: linear-gradient(180deg, transparent 40%, rgba(8,6,5,.35) 60%, rgba(8,6,5,.85) 100%); }
+
+/* accents on black: copper highlights, rust details */
+.hero h1 em { color: var(--blush); }
+.wcard__client { color: var(--ember); opacity: 1; }
+.nav a[aria-current="page"], .footer__links a[aria-current="page"], .footer__links .lang-link { color: var(--ember); }
+.footer a:hover, .next:hover .next__title { color: var(--ember); }
+.film__play { background: rgba(8,6,5,.4); }
+.film__play:hover { background: var(--rust); color: var(--blush); border-color: var(--rust); }
+.btn--ghost:hover { --bg: var(--blush); --fg: var(--ink); }
+.mmenu a.big[aria-current="page"] .mm__label, .mmenu a.big[aria-current="page"] .mm__num { color: var(--ember); }
+.mmenu a.big[aria-current="page"] .mm__arrow, .mmenu a.big:hover .mm__arrow { background: var(--ember); border-color: var(--ember); color: var(--bg-deep); }
+
+/* thin rust hairline where black sections meet, for a finished, premium edge */
+.about, .work, .cta, .phero { border-top: 1px solid rgba(155,72,37,.28); }
+.hero + .about { border-top: 0; }
+
+/* stats and dividers sit on black */
+.stats { border-color: rgba(254,224,207,.14); }
+.stat + .stat { border-color: rgba(254,224,207,.14); }
+.work__list > .wcard-wrap + .wcard-wrap::before,
+.cases > .wcard-wrap + .wcard-wrap::before { background: linear-gradient(90deg, transparent, rgba(227,154,108,.35) 18%, rgba(227,154,108,.35) 82%, transparent) !important; }
+
+/* =========================================================
+   NO PATTERNS — light, line and monogram instead
+   ========================================================= */
+/* 1. statement: a copper "stage light" from above and a thin light beam down to the logo */
+.about { padding-top: clamp(150px, 17vw, 230px); }
+.about::before {
+  background: radial-gradient(ellipse 55% 60% at 50% 0%, rgba(227,154,108,.17), rgba(155,72,37,.06) 45%, transparent 72%) !important;
+  -webkit-mask-image: none !important; mask-image: none !important; filter: none !important;
+  inset: 0 !important; height: auto !important;
+}
+.about::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 0; left: 50%; width: 1px; height: clamp(90px, 11vw, 160px); transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, rgba(227,154,108,.75));
+}
+
+/* 2. projects: a warm rust glow in the leading corner */
+.work::before {
+  background: radial-gradient(circle at 0% 0%, rgba(155,72,37,.24), transparent 60%) !important;
+  -webkit-mask-image: none !important; mask-image: none !important; opacity: 1 !important;
+  width: min(80vw, 1100px) !important; aspect-ratio: 1 / .75 !important;
+}
+[dir="rtl"] .work::before { transform: scaleX(-1); }
+
+/* 3. call to action: a spotlight behind the rotating ring */
+.cta::after {
+  background: radial-gradient(circle at 50% 50%, rgba(155,72,37,.32), rgba(155,72,37,.08) 38%, transparent 62%) !important;
+  inset: 0 !important; height: auto !important;
+}
+
+/* 4. page headers: a large, faint outline of the DO monogram on the trailing side, with a glow */
+.phero::before {
+  top: 50% !important; inset-inline-end: -6% !important; width: min(64vw, 900px) !important; aspect-ratio: 287 / 155 !important;
+  transform: translateY(-38%);
+  background: url("../logo/do-mark-outline.svg") no-repeat center / contain !important;
+  opacity: .14; -webkit-mask-image: none !important; mask-image: none !important;
+}
+[dir="rtl"] .phero::before { transform: translateY(-38%); }
+.phero { background: radial-gradient(ellipse 70% 80% at 85% 20%, rgba(155,72,37,.18), transparent 65%), var(--bg-dark); }
+[dir="rtl"] .phero { background: radial-gradient(ellipse 70% 80% at 15% 20%, rgba(155,72,37,.18), transparent 65%), var(--bg-dark); }
+
+/* 5. footer: a soft glow rising behind the giant DO */
+.footer::before {
+  background: radial-gradient(ellipse 60% 55% at 50% 100%, rgba(155,72,37,.3), transparent 70%) !important;
+  opacity: 1 !important;
+}
+
+/* 6. light sections: a gentle blush gradient instead of a pattern */
+.path::after, .follow::before { background: none !important; }
+.path { background: linear-gradient(180deg, #fee0cf 0%, #fbd6c2 100%); }
+.follow { padding-top: clamp(90px, 13vw, 180px); background: linear-gradient(180deg, #fbd6c2 0%, #fee0cf 55%); }
+
+/* 7. mobile menu: monogram outline + glow at the bottom */
+.mmenu::after {
+  background:
+    url("../logo/do-mark-outline.svg") no-repeat center 88% / min(86vw, 420px) auto,
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(155,72,37,.28), transparent 70%) !important;
+  height: min(70vw, 380px) !important; opacity: .9;
+}
+
+/* 8. project divider: a small copper diamond instead of the ornament */
+.work__list > .wcard-wrap + .wcard-wrap::after,
+.cases > .wcard-wrap + .wcard-wrap::after {
+  width: 9px !important; height: 9px !important; background: var(--bg-dark) !important;
+  border: 1px solid rgba(227,154,108,.85); box-shadow: 0 0 0 9px var(--bg-dark) !important;
+  transform: translate(-50%, -50%) rotate(45deg) !important; opacity: 1 !important;
+}
+
+/* 9. loader: the Do Events logo fills with colour */
+.loader__mark { width: min(200px, 44vw); color: rgba(254,224,207,.18); }
+.loader__mark > svg { display: block; width: 100%; height: auto; }
+.loader__mark .fill { color: var(--blush); }
+.loader__mark .fill svg { display: block; width: 100%; height: auto; }
+.loader { background: radial-gradient(circle at 50% 45%, rgba(155,72,37,.22), transparent 55%), var(--bg-dark); }
+/* mobile menu: glow on the panel itself, monogram outline kept very faint so it never competes with the buttons */
+.mmenu { background: radial-gradient(ellipse 90% 45% at 50% 100%, rgba(155,72,37,.26), transparent 70%), var(--bg-deep); }
+.mmenu::after {
+  background: url("../logo/do-mark-outline.svg") no-repeat center 92% / min(92vw, 440px) auto !important;
+  height: min(60vw, 330px) !important; opacity: .13 !important;
+}
+
+/* =========================================================
+   LARGE SCREENS (24–32" monitors) — everything scales together
+   Below 1600px nothing changes: 1rem stays 16px.
+   ========================================================= */
+@media (min-width: 1600px) {
+  /* ~18px at 1920 (27" 1080p), ~21px at 2560 (27" 1440p) */
+  html { font-size: clamp(16px, calc(0.6vw + 6.4px), 21px); }
+}
+
+/* header and full-width strips line up with the content column at every width */
+.header { padding: 1.125rem var(--edge); }
+.header.is-scrolled { padding-block: .75rem; }
+.follow__rail { padding-left: var(--edge); }
+[dir="rtl"] .follow__rail { padding-left: 0; padding-right: var(--edge); }
+.expand__copy { left: var(--edge); right: var(--edge); }
+
+/* fixed pixel sizes → rem so they grow with the screen (identical at 16px) */
+.header__logo { width: 6rem; }
+.nav { padding: .3125rem; border-radius: .625rem; }
+.nav a { padding: .5625rem .9375rem; border-radius: .4375rem; }
+.btn { height: 3rem; border-radius: .5rem; }
+.header .btn, .lang-toggle, .sound-toggle { height: 2.625rem; }
+.sound-toggle { width: 2.625rem; }
+.burger { width: 2.875rem; height: 2.625rem; }
+.lang-toggle { padding: 0 .875rem; }
+.btn__dot { width: .4375rem; height: .4375rem; }
+.btn__arrow { width: .75rem; height: .75rem; }
+.sound-toggle__bars { height: .875rem; gap: .16rem; }
+
+.hero__inner { padding-top: clamp(110px, 15vh, 10rem); padding-bottom: 1.875rem; }
+.ticker__item { height: 5rem; padding-right: clamp(40px, 4.5vw, 4.5rem); }
+.ticker__item--logo img { --h: 2.5rem; }
+.ticker__item--logo[data-client="ditfest"] img { --h: 4.5rem; }
+.ticker__item--logo[data-client="oq"] img { --h: 2.125rem; }
+.ticker__item--logo[data-client="du"] img { --h: 3.875rem; }
+.ticker__item--logo[data-client="millennium"] img { --h: 3.875rem; }
+.ticker__item--logo[data-client="mymoon"] img { --h: 2.625rem; }
+.ticker__item--logo[data-client="dhofar-champ"] img { --h: 1.75rem; }
+
+.section { padding: clamp(90px, 13vw, 11.25rem) 0; }
+.about { padding-top: clamp(150px, 17vw, 14.375rem); }
+.cta { padding: clamp(120px, 16vw, 13.75rem) 0; }
+.phero { padding: clamp(150px, 20vh, 13.75rem) 0 clamp(60px, 8vw, 6.875rem); }
+.follow { padding-top: clamp(90px, 13vw, 11.25rem); }
+.work__head { gap: 1.875rem; margin-bottom: clamp(70px, 10vw, 8.75rem); }
+.work__list { --list-gap: clamp(100px, 14vw, 12.5rem); }
+.work__more { margin-top: clamp(80px, 10vw, 8.75rem); }
+.wcard__details { grid-template-columns: 1fr minmax(15rem, 26.25rem); gap: 1.875rem; padding-top: 1.625rem; }
+.follow__head { grid-template-columns: 1fr minmax(16.25rem, 26.25rem); gap: 2.25rem; margin-bottom: 4.375rem; }
+.follow__rail { gap: 1.125rem; }
+.ig { width: clamp(220px, 22vw, 20.625rem); border-radius: .625rem; }
+.ig:nth-child(even) { margin-top: 4.375rem; }
+.cases { column-gap: clamp(24px, 4vw, 4.375rem); row-gap: clamp(70px, 9vw, 8.125rem); }
+.cases .wcard-wrap:nth-child(even) { margin-top: clamp(120px, 18vw, 17.5rem); }
+.path__grid { gap: clamp(24px, 4vw, 4.375rem); }
+.cta__circle { width: min(68.75rem, 130vw); }
+.film__play { width: clamp(84px, 9vw, 8rem); }
+.footer { padding-top: 3.125rem; }
+.footer__top { gap: 3.125rem; padding-top: 3.125rem; }
+.footer__info { gap: 1.875rem; }
+.footer__legal { margin-top: 3.375rem; }
+.footer__giant { margin-top: 2.5rem; height: clamp(150px, 30vw, 27.5rem); }
+.socials a { width: 2.5rem; height: 2.5rem; }
+.socials svg { width: 1.0625rem; height: 1.0625rem; }
+.block { gap: 2.5rem clamp(30px, 6vw, 6.875rem); padding: clamp(50px, 6vw, 5rem) 0; }
+.checks li { grid-template-columns: 1.625rem 1fr; gap: .875rem; padding: 1rem 0; }
+.checks li::before { width: 1.25rem; height: 1.25rem; }
+.step { min-height: 16.25rem; padding: 1.75rem 1.5rem 1.875rem; }
+.svc__item { padding-block: 2.125rem 2.5rem; }
+.contact-grid { gap: clamp(40px, 7vw, 7.5rem); }
+.map { margin-top: clamp(60px, 8vw, 6.875rem); }
+.phero__meta { gap: 1.5rem; margin-top: clamp(50px, 7vw, 5.625rem); padding-top: 1.375rem; }
+.lightbox__stage { width: min(80rem, 100%); }
+@media (max-width: 560px) { .ticker__item { height: 3.75rem; } }
+/* re-assert small-screen layouts after the rem conversion above */
+@media (max-width: 1080px) { .lang-toggle { padding: 0 .75rem; } }
+@media (max-width: 860px) {
+  .wcard__details { grid-template-columns: 1fr; gap: .875rem; }
+  .follow__head { grid-template-columns: 1fr; }
+  .cases .wcard-wrap:nth-child(even) { margin-top: 0; }
+}
+@media (max-width: 560px) {
+  .header__logo { width: 5rem; }
+  .ig { width: 62vw; }
+  .ig:nth-child(even) { margin-top: 2.5rem; }
+}
+/* Weddings / Corporate split: both halves start on the same line, whatever their headline length */
+.path__grid { align-items: start; }
+.path__slash { align-self: center; }
+@media (max-width: 560px) { .film__play { width: 4rem; } }
